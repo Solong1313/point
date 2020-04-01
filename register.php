@@ -53,11 +53,11 @@
                             <div class="card-header">Register</div>
                             <div class="card-body">
 
-                                <?php if(!empty($_SESSION['name'] ['email'] ['password'])){ ?>
+                                <?php if(!empty($_SESSION['success'])){ ?>
                                 <div class="alert alert-success" role="alert">
                                     <?php
-                                    echo $_SESSION['name'] ['email'] ['password'];
-                                    unset($_SESSION ['name'] ['email'] ['password']);
+                                    echo $_SESSION['success'];
+                                    unset($_SESSION['success']);
                                     } ?>
                                 </div>
 
