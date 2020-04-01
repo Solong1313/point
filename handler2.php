@@ -2,11 +2,7 @@
 session_start();
 require_once "conf.php";
 
-if (($_POST['password'] != $_POST['password_confirmation'])){
-    $_SESSION['error']['password_confirmation'] = "Пароли не совпадают";
-    header("location: register.php");
-}
-elseif(empty($_POST['name']) && empty($_POST['email']) &&  empty($_POST['password'])){
+if(empty($_POST['name']) && empty($_POST['email']) &&  empty($_POST['password'])){
     $_SESSION['error']['name'] = "Заполните поле";
     $_SESSION['error']['email'] = "Заполните поле";
     $_SESSION['error']['password'] = "Заполните поле";
@@ -26,6 +22,10 @@ elseif (empty($_POST['password'])){
     $_SESSION['error']['password'] = "Заполните поле";
     header("location: register.php");
 }
+elseif (($_POST['password'] != $_POST['password_confirmation'])){
+    $_SESSION['error']['password_confirmation'] = "Пароли не совпадают";
+    header("location: register.php");
+}
 else{
     require_once 'database.php';
     $name = $_POST['name'];
@@ -39,7 +39,7 @@ else{
     $statement = $pdo->prepare($sql);
     $result = $statement->execute([$name, $mail, $password]);
 
-    $_SESSION['name'] ['email'] ['password']= 'Регистрация прошла успешно!';
+    $_SESSION['success']= 'Регистрация прошла успешно!';
     header("location: register.php");
 }
 
